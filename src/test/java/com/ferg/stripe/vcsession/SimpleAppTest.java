@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +47,33 @@ public class SimpleAppTest {
         Map<String, Integer> minValueRow = simpleApp.minByColumn(table, "b");
         MatcherAssert.assertThat(minValueRow, IsMapContaining.hasEntry("a", 1));
         MatcherAssert.assertThat(minValueRow, IsMapContaining.hasEntry("b", -2));
+    }
+
+    @Test
+    public void minByColumnTestCase4(){
+        SimpleApp simpleApp = new SimpleApp();
+        List<Map<String, Integer>> table = Arrays.asList(
+                Map.of("a", 3)
+        );
+        Map<String, Integer> minValueRow = simpleApp.minByColumn(table, "b");
+        MatcherAssert.assertThat(minValueRow, IsMapContaining.hasEntry("a", 3));
+    }
+
+
+    @Test void minByColumnTestCase5(){
+        SimpleApp simpleApp = new SimpleApp();
+        Map<String, Integer> stringIntegerMap = simpleApp.minByColumn(Collections.emptyList(), null);
+        Assertions.assertNull(stringIntegerMap);
+    }
+
+    @Test
+    public void minByColumnTestCase6(){
+        SimpleApp simpleApp = new SimpleApp();
+        List<Map<String, Integer>> table = Arrays.asList(
+                Map.of("a", 3)
+        );
+        Map<String, Integer> minValueRow = simpleApp.minByColumn(table, "");
+        MatcherAssert.assertThat(minValueRow, IsMapContaining.hasEntry("a", 3));
     }
 
     @Test
@@ -98,6 +125,12 @@ public class SimpleAppTest {
         Map<String, Integer> minValueRow = simpleApp.orderByColumn(table, Arrays.asList("x", "y"));
         MatcherAssert.assertThat(minValueRow, IsMapContaining.hasEntry("x", 1000));
         MatcherAssert.assertThat(minValueRow, IsMapContaining.hasEntry("y", 0));
+    }
+
+    @Test void orderByColumnTestCase5(){
+        SimpleApp simpleApp = new SimpleApp();
+        Map<String, Integer> stringIntegerMap = simpleApp.orderByColumn(Collections.emptyList(), Collections.emptyList());
+        Assertions.assertNull(stringIntegerMap);
     }
 
 
