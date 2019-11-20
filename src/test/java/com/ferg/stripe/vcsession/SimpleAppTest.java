@@ -1,10 +1,10 @@
 package com.ferg.stripe.vcsession;
 
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsMapContaining;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.util.Assert;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -66,14 +66,23 @@ public class SimpleAppTest {
         Assertions.assertNull(stringIntegerMap);
     }
 
+    @Test void minByColumnTestCase6(){
+        SimpleApp simpleApp = new SimpleApp();
+        List<Map<String, Integer>> table = Arrays.asList(
+                Map.of("a", 3)
+        );
+        Map<String, Integer> stringIntegerMap = simpleApp.minByColumn(table, null);
+        Assertions.assertNull(stringIntegerMap);
+    }
+
     @Test
-    public void minByColumnTestCase6(){
+    public void minByColumnTestCase7(){
         SimpleApp simpleApp = new SimpleApp();
         List<Map<String, Integer>> table = Arrays.asList(
                 Map.of("a", 3)
         );
         Map<String, Integer> minValueRow = simpleApp.minByColumn(table, "");
-        MatcherAssert.assertThat(minValueRow, IsMapContaining.hasEntry("a", 3));
+        Assertions.assertNull(minValueRow);
     }
 
     @Test
@@ -127,11 +136,19 @@ public class SimpleAppTest {
         MatcherAssert.assertThat(minValueRow, IsMapContaining.hasEntry("y", 0));
     }
 
-    @Test void orderByColumnTestCase5(){
+    @Test
+    public void orderByColumnTestCase5(){
         SimpleApp simpleApp = new SimpleApp();
         Map<String, Integer> stringIntegerMap = simpleApp.orderByColumn(Collections.emptyList(), Collections.emptyList());
         Assertions.assertNull(stringIntegerMap);
     }
 
+
+    @Test
+    public void orderByColumnTestCase6(){
+        SimpleApp simpleApp = new SimpleApp();
+        Map<String, Integer> stringIntegerMap = simpleApp.orderByColumn(null, null);
+        Assertions.assertNull(stringIntegerMap);
+    }
 
 }
