@@ -151,4 +151,14 @@ public class SimpleAppTest {
         Assertions.assertNull(stringIntegerMap);
     }
 
+    @Test
+    public void orderByColumnTestCase7(){
+        SimpleApp simpleApp = new SimpleApp();
+        List<Map<String, Integer>> table = Arrays.asList(
+                Map.of("x", 1000, "y", 1)
+        );
+        Map<String, Integer> minValueRow = simpleApp.orderByColumn(table, Arrays.asList(""));
+        MatcherAssert.assertThat(minValueRow, IsMapContaining.hasEntry("x", 1000));
+        MatcherAssert.assertThat(minValueRow, IsMapContaining.hasEntry("y", 1));
+    }
 }
